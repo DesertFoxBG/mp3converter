@@ -8,6 +8,7 @@ const http = require('https');
 const ytdl = require('ytdl-core');
 var ffmpeg = require('ffmpeg');
 const { exec } = require('child_process');
+var cleaner = require('../cleanDownloads')
 
 function downloadWorking(res, url, format) {
   res.header('Content-Disposition', `attachment; filename="file.${format}"`);
@@ -82,6 +83,7 @@ router.get('/fbdownload', function (req, res, next) {
       });
       readStream.on('end', function (chunk) {
         res.download('./downloads/' + title + '.' + format, title + '.' + format);
+        cleaner();
       });
     });
   });

@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-function cleanDir() {
+module.exports = function cleanDir() {
     fs.readdir('./downloads/', (err, files) => {
         files.forEach(file => {
             console.log(file);
@@ -9,7 +9,3 @@ function cleanDir() {
         console.log('clean');
     });
 }
-
-setInterval(() => {
-    cleanDir();
-}, 5000);
