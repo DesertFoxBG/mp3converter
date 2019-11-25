@@ -11,7 +11,7 @@ const { exec } = require('child_process');
 var cleaner = require('../cleanDownloads');
 
 function downloadWorking(res, url, format) {
-  res.header('Content-Disposition', `attachment; filename="file.${format}"`);
+  res.header('Content-Disposition', `attachment; filename="youtubeDownload.${format}"`);
 
   ytdl(url, {
     format: format
