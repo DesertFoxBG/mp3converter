@@ -51,7 +51,9 @@ router.get('/fbdownload', function (req, res, next) {
 
       res.attachment('./public/downloads/' + title + '.' + format);
       response.pipe(res);
-      cleaner();
+      setTimeout(() => {
+        cleaner();
+      }, 10000);
 
       //res.download('./public/downloads/' + title + '.' + format);
     });
