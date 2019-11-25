@@ -1,10 +1,10 @@
 var fs = require('fs');
 
 module.exports = function cleanDir() {
-    fs.readdir('./downloads/', (err, files) => {
+    fs.readdir('./public/downloads/', (err, files) => {
         files.forEach(file => {
             console.log(file);
-            fs.unlinkSync('./downloads/' + file);
+            fs.unlinkSync('./public/downloads/' + file);
         });
         console.log('clean');
     });
