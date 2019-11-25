@@ -9,6 +9,7 @@ const ytdl = require('ytdl-core');
 var path = require("path");
 const { exec } = require('child_process');
 var cleaner = require('../cleanDownloads');
+var vidl = require('vimeo-downloader');
 
 function downloadWorking(res, url, format) {
   res.header('Content-Disposition', `attachment; filename="youtubeDownload.${format}"`);
@@ -51,6 +52,7 @@ router.get('/fbdownload', function (req, res, next) {
 
       res.attachment('./public/downloads/' + title + '.' + format);
       response.pipe(res);
+
       setTimeout(() => {
         cleaner();
       }, 10000);
@@ -58,6 +60,19 @@ router.get('/fbdownload', function (req, res, next) {
       //res.download('./public/downloads/' + title + '.' + format);
     });
   });
+});
+
+router.get('/vimeo', function (req, res, next) {
+  res.render('vimeo');
+});
+
+router.get('/vmdownload', function (req, res, next) {
+  var format = req.query.format;
+  var url = req.query.url;
+
+  res.attachment('./public/downloads/vide.' + format);
+  vidl(url, { quality: '360p' })
+    .pipe(res);
 });
 
 module.exports = router;
