@@ -10,6 +10,9 @@ var path = require("path");
 const { exec } = require('child_process');
 var cleaner = require('../cleanDownloads');
 var vidl = require('vimeo-downloader');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+var request = require("request");
 
 function downloadWorking(res, url, format) {
   res.header('Content-Disposition', `attachment; filename="youtubeDownload.${format}"`);
@@ -73,6 +76,36 @@ router.get('/vmdownload', function (req, res, next) {
   res.attachment('./public/downloads/vide.' + format);
   vidl(url, { quality: '360p' })
     .pipe(res);
+});
+
+router.get('/tiktok', function (req, res, next) {
+  res.render('tiktok');
+});
+
+router.get('/ttdownload', function (req, res, next) {
+  var format = req.query.format;
+  var url = req.query.url;
+
+  var options = {
+    method: 'POST',
+    url: 'https://www.expertsphp.com/download.php',
+    qs: { '': '' },
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    form: { url: url }
+  };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    const dom = new JSDOM(body);
+    var video_url = dom.window.document.querySelector('source').getAttribute('src');
+    console.log(video_url);
+
+    var request = http.get(video_url, function (response) {
+      res.attachment('tiktok.' + format);
+      response.pipe(res);
+    });
+  });
 });
 
 module.exports = router;

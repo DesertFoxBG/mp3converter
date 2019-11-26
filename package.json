@@ -19,11 +19,13 @@
     "http": "0.0.0",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
+    "jsdom": "^15.2.1",
     "morgan": "~1.9.1",
     "node-url-downloader": "^0.1.9",
     "nodemon": "^1.19.4",
     "ssh2-sftp-client": "^4.2.4",
     "vimeo-downloader": "^1.0.4",
+    "website-scraper": "^4.2.0",
     "youtube-dl": "^2.1.0",
     "youtube-mp3-downloader": "^0.6.3",
     "ytdl-core": "^1.0.0"

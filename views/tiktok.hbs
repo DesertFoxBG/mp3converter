@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152223737-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-152223737-1');
+    </script>
+
+    <!--Adsense-->
+    <script data-ad-client="ca-pub-7369887242150230" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bars"></i></button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="/"><i class="fas fa-home"></i></a>
+                <a href="/youtube"><i class="fab fa-youtube"></i></a>
+                <a href="/facebook"><i class="fab fa-facebook-square"></i></a>
+                <a href="/vimeo"><i class="fab fa-vimeo-v"></i></a>
+                <a href="/tiktok"><i class="fas fa-music"></i></a>
+            </div>
+        </div>
+        <a class="logo">TikTok <i class="fas fa-music"></i></a>
+    </div>
+    </div>
+
+    <div class="page">
+        <div class="side">
+            <form action="/ttdownload" method="get">
+                <input class="input_url" type="text" name="url">
+                <div class="checkboxes">
+                    <div class="checkbox">
+                        <p><input type="checkbox" name="format" value="mp4" style="margin: 0; position: relative;"> MP4
+                        </p>
+                    </div>
+                    <div class="checkbox">
+                        <p><input type="checkbox" name="format" value="mp3" style="margin: 0; position: relative;"> MP3
+                        </p>
+                    </div>
+                </div>
+                <input type="submit" value="Download">
+            </form>
+        </div>
+        <div class="main">
+
+        </div>
+
+        <script src="./javascripts/dropdown.js"></script>
+</body>
+
+</html>
