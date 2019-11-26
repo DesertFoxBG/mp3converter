@@ -40,24 +40,31 @@
                 <a href="/tiktok"><i class="fas fa-music"></i></a>
             </div>
         </div>
-        <a class="logo">YouTube <i class="fab fa-youtube"></i></i></a>
+        <a class="logo">YouTube <i class="fab fa-youtube"></i></a>
     </div>
     </div>
 
     <div class="page">
         <div class="side">
-            <form action="/ytdownload" method="get">
-                <input class="input_url" type="text" name="url">
-                <div class="checkboxes">
-                    <div class="checkbox">
-                        <p><input type="checkbox" name="format" value="mp4" style="margin: 0; position: relative;"> MP4</p>
+            <div class="form-container">
+                <form action="/ytdownload" method="get">
+                    <input class="input_url" type="text" name="url">
+                    <div class="checkboxes">
+                        <div class="checkbox">
+                            <p><input type="checkbox" name="format" value="mp4" style="margin: 0; position: relative;">
+                                MP4
+                            </p>
+                        </div>
+                        <div class="checkbox">
+                            <p><input type="checkbox" name="format" value="mp3" style="margin: 0; position: relative;">
+                                MP3
+                            </p>
+                        </div>
                     </div>
-                    <div class="checkbox">
-                        <p><input type="checkbox" name="format" value="mp3" style="margin: 0; position: relative;"> MP3</p>
-                    </div>
-                </div>
-                <input type="submit" value="Download">
-            </form>
+                    <input type="submit" value="Download">
+                    <p class="example">Example: https://www.youtube.com/watch?v=8goPPqocR3s</p>
+                </form>
+            </div>
         </div>
         <div class="main">
 
