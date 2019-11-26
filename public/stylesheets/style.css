@@ -135,6 +135,10 @@ body {
   border: 1px solid black;
 }
 
+.form-container input[type="checkbox"] {
+ cursor: pointer;
+}
+
 .form-container .example {
   font-weight: bold;
   margin: 10px auto 0;
