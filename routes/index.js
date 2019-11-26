@@ -13,6 +13,7 @@ var vidl = require('vimeo-downloader');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 var request = require("request");
+var tvd = require('twitter-video-downloader');
 
 function downloadWorking(res, url, format) {
   res.header('Content-Disposition', `attachment; filename="youtubeDownload.${format}"`);

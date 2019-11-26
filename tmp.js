@@ -1,6 +1,12 @@
-var req = require('request');
-
-req.post('https://www.expertsphp.com/download.php', { 'url': 'https://m.tiktok.com/v/6761774363306986758.html' }, (httpResponse, body) => {
-//console.log(httpResponse);  
-console.log(body);
+'use strict';
+ 
+let tt = require('twitter-dl');
+ 
+let folder = './';
+let video = 'https://twitter.com/DierksBentley/status/703222600919588864';
+ 
+tt.download(video, folder).then((result) => {
+  console.log(result);
+}).catch((err) => {
+  console.log(err);
 });
