@@ -47,27 +47,17 @@
     <div class="page">
         <div class="side">
             <div class="form-container">
-                <form action="/ytdownload" method="get">
+                <form action="/ytinfo" method="get">
                     <input class="input_url" type="text" name="url">
-                    <div class="checkboxes">
-                        <div class="checkbox">
-                            <p><input type="checkbox" name="format" value="mp4" style="margin: 0; position: relative;">
-                                MP4
-                            </p>
-                        </div>
-                        <div class="checkbox">
-                            <p><input type="checkbox" name="format" value="mp3" style="margin: 0; position: relative;">
-                                MP3
-                            </p>
-                        </div>
-                    </div>
-                    <input type="submit" value="Download">
+                    <input type="submit" value="Info">
                     <p class="example">Example: https://www.youtube.com/watch?v=8goPPqocR3s</p>
                 </form>
             </div>
         </div>
         <div class="main">
-
+            <div class="checkboxes">
+                {{{ info }}}
+            </div>
         </div>
 
         <script src="./javascripts/dropdown.js"></script>

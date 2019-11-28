@@ -23,6 +23,7 @@
     "morgan": "~1.9.1",
     "node-url-downloader": "^0.1.9",
     "nodemon": "^1.19.4",
+    "npm-check-updates": "^3.2.2",
     "ssh2-sftp-client": "^4.2.4",
     "twitter-dl": "^1.0.6",
     "twitter-video-downloader": "^1.0.13",

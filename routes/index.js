@@ -7,20 +7,26 @@ const facebookdl = require('fb-video-downloader');
 const http = require('https');
 const ytdl = require('ytdl-core');
 var path = require("path");
-const { exec } = require('child_process');
 var cleaner = require('../cleanDownloads');
 var vidl = require('vimeo-downloader');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 var request = require("request");
-var tvd = require('twitter-video-downloader');
 
-function downloadWorking(res, url, format) {
+function downloadYT(res, url, format) {
   res.header('Content-Disposition', `attachment; filename="youtubeDownload.${format}"`);
 
-  ytdl(url, {
-    format: format
-  }).pipe(res);
+  try {
+    ytdl(url, {
+      format: format
+    }).pipe(res);
+  }
+  catch {
+    var request = http.get(url, function (response) {
+      res.attachment('video.' + format);
+      response.pipe(res);
+    });
+  }
 }
 
 /* GET home page. */
@@ -29,52 +35,96 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/youtube', function (req, res, next) {
-  res.render('youtube');
+  res.render('youtube', { info: '' });
+});
+
+router.get('/ytinfo', function (req, res, next) {
+  var url = req.query.url;
+
+  ytdl.getInfo(url, (err, info) => {
+    if (err) throw err;
+    console.log(info.formats);
+    var div_els = `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">audio/mp3 | audio</p><input name="url" value="${url}" style="display: none;"><input name="format" value="mp3" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`;
+    for (var c = 0; c < info.formats.length; c++) {
+      let format = info.formats[c];
+      let size = format.size;
+      div_els += `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">${format.type.substring(0, format.type.indexOf(';'))} ${size ? '| ' + format.size : '| ' + format.type.substring(0, format.type.indexOf('/'))}</p><input name="url" value="${format.url}" style="display: none;"><input name="format" value="${format.type.substring(format.type.indexOf('/') + 1, format.type.indexOf(';'))}" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`
+    }
+    res.render('youtube', { info: div_els });
+  });
 });
 
 router.get('/ytdownload', async function (req, res, next) {
   var url = req.query.url;
   var format = req.query.format;
+  console.log(format);
 
-  downloadWorking(res, url, format);
+  downloadYT(res, url, format);
   //downloadVideo(format, url, res, req);
 });
 
 router.get('/facebook', function (req, res, next) {
-  res.render('facebook');
+  res.render('facebook', { info: '' });
 });
 
-router.get('/fbdownload', function (req, res, next) {
-  var format = req.query.format;
+router.get('/fbinfo', function (req, res, next) {
   var url = req.query.url;
 
   facebookdl.getInfo(url).then((info) => {
-    var title = info.title.replace(/[| !?<>]/g, '');
-    var file = fs.createWriteStream('./public/downloads/' + title + '.' + format);
-    var request = http.get(info.download.sd, function (response) {
-      response.pipe(file); // for future work
+    var title = info.title;
+    console.log(Object.keys(info.download));
+    var div_els = ``;
+    for(var c = 0; c < Object.keys(info.download).length; c++) {
+      var key = Object.keys(info.download)[c];
+      console.log(key, info.download[Object.keys(info.download)[c]]);
+      if(info.download[Object.keys(info.download)[c]] == undefined) continue;
+      div_els += `<form action="/fbdownload"><p style="font-weight: bold;">${title} | Quality: ${key.toLocaleUpperCase()}</p><input name="url" value="${info.download[key]}" style="display: none;"><select name="format"><option value="mp3">MP3</option><option value="mp4">MP4</option></select><input type="submit" value="Download" style="margin: 0; position: relative;"></form>`;
+    }
 
-      res.attachment('./public/downloads/' + title + '.' + format);
-      response.pipe(res);
+    res.render('facebook', { info: div_els });
+  });
+});
 
-      setTimeout(() => {
-        cleaner();
-      }, 10000);
+router.get('/fbdownload', function (req, res, next) {
+  var url = req.query.url;
+  var format = req.query.format;
+  var file = fs.createWriteStream('./public/downloads/fbvideo.' + format);
 
-      //res.download('./public/downloads/' + title + '.' + format);
-    });
+  var request = http.get(url, function (response) {
+    response.pipe(file); // for future work
+
+    res.attachment('./public/downloads/fbvideo.' + format);
+    response.pipe(res);
+
+    setTimeout(() => {
+      cleaner();
+    }, 10000);
+
+    //res.download('./public/downloads/' + title + '.' + format);
   });
 });
 
 router.get('/vimeo', function (req, res, next) {
-  res.render('vimeo');
+  res.render('vimeo', { info: '' });
+});
+
+router.get('/vminfo', function (req, res, next) {
+  var url = req.query.url;
+
+  var div_els = `<form action="/vmdownload"><p style="font-weight: bold;">Quality: 144p</p><input name="url" value="${url}" style="display: none;"><input name="quality" value="144p" style="display: none;"><select name="format"><option value="mp3">MP3</option><option value="mp4">MP4</option></select><input type="submit" value="Download" style="margin: 0; position: relative;"></form><form action="/vmdownload"><p style="font-weight: bold;">Quality: 360p</p><input name="url" value="${url}" style="display: none;"><input name="quality" value="360p" style="display: none;"><select name="format"><option value="mp3">MP3</option><option value="mp4">MP4</option></select><input type="submit" value="Download" style="margin: 0; position: relative;"></form><form action="/vmdownload"><p style="font-weight: bold;">Quality: 480p</p><input name="url" value="${url}" style="display: none;"><input name="quality" value="480p" style="display: none;"><select name="format"><option value="mp3">MP3</option><option value="mp4">MP4</option></select><input type="submit" value="Download" style="margin: 0; position: relative;"></form><form action="/vmdownload"><p style="font-weight: bold;">Quality: 720p</p><input name="url" value="${url}" style="display: none;"><input name="quality" value="720p" style="display: none;"><select name="format"><option value="mp3">MP3</option><option value="mp4">MP4</option></select><input type="submit" value="Download" style="margin: 0; position: relative;"></form><form action="/vmdownload"><p style="font-weight: bold;">Quality: 1080p</p><input name="url" value="${url}" style="display: none;"><input name="quality" value="1080p" style="display: none;"><select name="format"><option value="mp3">MP3</option><option value="mp4">MP4</option></select><input type="submit" value="Download" style="margin: 0; position: relative;"></form>`;
+
+  res.render('vimeo', { info: div_els });
 });
 
 router.get('/vmdownload', function (req, res, next) {
   var format = req.query.format;
   var url = req.query.url;
+  var quality = req.query.quality;
 
-  res.attachment('./public/downloads/vide.' + format);
+  vidl(url, { quality: quality })
+    .pipe(fs.createWriteStream('./public/downloads/vimeo.' + format));
+
+  res.attachment('./public/downloads/vimeo.' + format);
   vidl(url, { quality: '360p' })
     .pipe(res);
 });

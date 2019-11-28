@@ -120,11 +120,6 @@ body {
   margin: auto;
 }
 
-.checkbox input[type=checkbox] {
-  position: relative;
-  margin-left: 0;
-}
-
 .form-container {
   border: 2px dashed black;
   border-radius: 10px;
@@ -133,10 +128,6 @@ body {
 
 .form-container input[type="text"] {
   border: 1px solid black;
-}
-
-.form-container input[type="checkbox"] {
- cursor: pointer;
 }
 
 .form-container .example {
@@ -156,12 +147,42 @@ body {
   border-radius: 7px;
   background: transparent;
   font-weight: bold;
+  margin: 10px 0 0 0;
 }
 
 .form-container input[type="submit"]:hover {
   background: black;
   color: #f1f1f1;
   border-color: #f1f1f1;
+}
+
+.checkboxes form {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #f1f1f1;
+  margin: 10px auto;
+  width: 95%;
+  padding: 10px;
+}
+
+.checkboxes input[type="submit"] {
+  border: 2px solid black;
+  border-radius: 7px;
+  background: transparent;
+  font-weight: bold;
+}
+
+.checkboxes input[type="submit"]:hover {
+  background: black;
+  color: #f1f1f1;
+  border-color: #f1f1f1;
+}
+
+.checkboxes select {
+  border: 1px solid black;
+  display: block;
+  margin: 10px 0 10px 0;
+  border-radius: 5px;
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
