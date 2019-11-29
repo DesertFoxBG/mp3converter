@@ -43,12 +43,17 @@ router.get('/ytinfo', function (req, res, next) {
 
   ytdl.getInfo(url, (err, info) => {
     if (err) throw err;
-    console.log(info.formats);
-    var div_els = `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">audio/mp3 | audio</p><input name="url" value="${url}" style="display: none;"><input name="format" value="mp3" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`;
-    for (var c = 0; c < info.formats.length; c++) {
-      let format = info.formats[c];
-      let size = format.size;
-      div_els += `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">${format.type.substring(0, format.type.indexOf(';'))} ${size ? '| ' + format.size : '| ' + format.type.substring(0, format.type.indexOf('/'))}</p><input name="url" value="${format.url}" style="display: none;"><input name="format" value="${format.type.substring(format.type.indexOf('/') + 1, format.type.indexOf(';'))}" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`
+    console.log(info.player_response.streamingData.adaptiveFormats);
+    var div_els = `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">audio/mp3 | audio [Recommended]</p><input name="url" value="${url}" style="display: none;"><input name="format" value="mp4" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`;
+    for (var c = 0; c < info.player_response.streamingData.formats.length; c++) {
+      let format = info.player_response.streamingData.formats[c];
+      let quality = format.qualityLable;
+      div_els += `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">${format.mimeType.substring(0, format.mimeType.indexOf(';'))} ${quality ? '| ' + format.qualityLable : '| ' + format.quality} [Recommended]</p><input name="url" value="${format.url}" style="display: none;"><input name="format" value="${format.mimeType.substring(format.mimeType.indexOf('/') + 1, format.mimeType.indexOf(';'))}" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`
+    }
+    for (var c = 0; c < info.player_response.streamingData.adaptiveFormats.length; c++) {
+      let format = info.player_response.streamingData.adaptiveFormats[c];
+      let quality = format.qualityLable;
+      div_els += `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">${format.mimeType.substring(0, format.mimeType.indexOf(';'))} ${quality ? '| ' + format.qualityLable : '| ' + format.quality}</p><input name="url" value="${format.url}" style="display: none;"><input name="format" value="${format.mimeType.substring(format.mimeType.indexOf('/') + 1, format.mimeType.indexOf(';'))}" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`
     }
     res.render('youtube', { info: div_els });
   });
