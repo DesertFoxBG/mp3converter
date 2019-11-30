@@ -44,7 +44,7 @@ router.get('/ytinfo', function (req, res, next) {
   ytdl.getInfo(url, (err, info) => {
     if (err) throw err;
     console.log(info.player_response.streamingData.adaptiveFormats);
-    var div_els = `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">audio/mp3 | audio [Recommended]</p><input name="url" value="${url}" style="display: none;"><input name="format" value="mp4" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`;
+    var div_els = `<div class="checkbox"><form action="/ytdownload"><p style="font-weight: bold;">audio/mp3 | audio [Recommended]</p><input name="url" value="${url}" style="display: none;"><input name="format" value="mp3" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form></div>`;
     for (var c = 0; c < info.player_response.streamingData.formats.length; c++) {
       let format = info.player_response.streamingData.formats[c];
       let quality = format.qualityLable;
