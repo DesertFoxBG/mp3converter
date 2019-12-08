@@ -34,35 +34,32 @@
             <button onclick="myFunction()" class="dropbtn"><i class="fas fa-bars"></i></button>
             <div id="myDropdown" class="dropdown-content">
                 <a href="/"><i class="fas fa-home"></i></a>
-                <a href="/youtube"><i class="fab fa-youtube"></i></a>
-                <a href="/facebook"><i class="fab fa-facebook-square"></i></a>
-                <a href="/vimeo"><i class="fab fa-vimeo-v"></i></a>
-                <a href="/tiktok"><i class="fas fa-music"></i></a>
+                <a href="/tos"><i class="fas fa-scroll"></i></a>
+                <a href="/pp"><i class="fas fa-user-lock"></i></a>
             </div>
         </div>
-        <a class="logo">TikTok <i class="fas fa-music"></i></a>
-    </div>
+        <a class="logo">
+            <img class="logo-image" src="https://doneloadie.com/themes/default/img/logo.png">
+        </a>
     </div>
 
     <div class="page">
-        <div class="side">
+        <div class="container">
+            <h1>Enter a TikTok link here</h1>
             <div class="form-container">
-                <form action="/ttdownload" method="get">
-                    <input class="input_url" type="text" name="url">
-                    <select name="format" style="margin: 10px 0 0 0; border: 1px solid black; border-radius: 5px;">
-                        <option value="mp3">MP3</option>
-                        <option value="mp4">MP4</option>
-                    </select> <span style="font-weight: bold;">720p</span>
-                    <input type="submit" value="Download" style="display: block;">
-                    <p class="example">Example: https://m.tiktok.com/v/6760654800989342981.html</p>
+                <form action="/ttinfo" method="get">
+                    <input class="input_url" type="text" placeholder="Enter the video link ..." name="url"
+                        required><input type="submit" value="Download">
                 </form>
             </div>
         </div>
-        <div class="main">
 
+        <div class="information">
+            {{{ info }}}
         </div>
+    </div>
 
-        <script src="./javascripts/dropdown.js"></script>
+    <script src="./javascripts/dropdown.js"></script>
 </body>
 
 </html>

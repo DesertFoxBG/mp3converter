@@ -6,30 +6,22 @@
 body {
   font-family: "OCR A Std", monospace;
   overflow: auto;
+  background: url(../images/bg.jpg);
 }
 
 /* Header/logo Title */
 .header {
-  background-color: #f1f1f1;
+  background-color: #677fd2;
+  background-image: -webkit-linear-gradient(0deg, #415dbd 0%, #748cde 100%);
   padding: 20px 10px;
 }
 
-.header a {
-  color: black;
-  text-align: center;
-  padding: 8px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
-}
-
-.header a.logo {
-  font-size: 25px;
-  font-weight: bold;
+.header .logo-image {
+  width: 135px;
   float: right;
   display: block;
   cursor: pointer;
+  margin: 5px 20px;
 }
 
 .header a:hover {
@@ -41,33 +33,7 @@ body {
 @import url("https://fonts.googleapis.com/css?family=Monoton");
 
 /* Column container */
-.page {
-  display: -ms-flexbox;
-  /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap;
-  /* IE10 */
-  flex-wrap: wrap;
-}
-
-/* Create two unequal columns that sits next to each other */
-/* Sidebar/left column */
-.side {
-  -ms-flex: 30%;
-  /* IE10 */
-  flex: 30%;
-  background-color: #f1f1f1;
-  padding: 20px;
-}
-
-/* Main column */
-.main {
-  -ms-flex: 70%;
-  /* IE10 */
-  flex: 70%;
-  background-color: white;
-  padding: 10px;
-}
+.page {}
 
 .dropdown {
   position: absolute;
@@ -77,7 +43,7 @@ body {
 }
 
 .dropbtn {
-  background: #f1f1f1;
+  background: transparent;
   color: black;
   font-size: 30px;
   width: 70px;
@@ -87,13 +53,13 @@ body {
 }
 
 .dropdown-content {
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   display: none;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(65, 93, 189, 0.7);
   overflow: auto;
   width: 70px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
   z-index: 1;
   text-align: center;
 }
@@ -101,14 +67,15 @@ body {
 .dropdown-content a {
   color: white;
   width: 100%;
-  font-size: 20px;
+  font-size: 30px;
   text-decoration: none;
   text-align: center;
   display: block;
+  transition: 0.5s;
 }
 
 .dropdown a:hover {
-  background-color: #ddd;
+  background: rgba(121, 143, 224, 0.7);
 }
 
 .show {
@@ -120,68 +87,156 @@ body {
   margin: auto;
 }
 
+.container h1 {
+  color: #f1f5f8;
+  margin: 50px auto;
+  text-align: center;
+}
+
 .form-container {
-  border: 2px dashed black;
-  border-radius: 10px;
-  padding: 10px;
+  width: 50%;
+  margin: 100px auto;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.5);
+  background: #677fd2;
+  display: block;
+}
+
+.form-container form {
+  width: 100%;
 }
 
 .form-container input[type="text"] {
-  border: 1px solid black;
-}
-
-.form-container .example {
-  font-weight: bold;
-  margin: 10px auto 0;
-  text-align: center;
-  width: 95%;
-  border-radius: 5px;
-}
-
-.form-container .example:hover {
-  background: #ddd;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px 0 0 5px;
+  width: 80%;
+  background: #f1f5f8;
+  height: 60px;
+  font-size: 18px;
+  padding: 2px 2px 2px 12px;
+  float: left;
 }
 
 .form-container input[type="submit"] {
-  border: 2px solid black;
-  border-radius: 7px;
+  width: 20%;
+  border: 1px solid #748cde;
   background: transparent;
   font-weight: bold;
-  margin: 10px 0 0 0;
+  border-radius: 0 5px 5px 0;
+  background: #677fd2;
+  color: white;
+  transition: 0.5s;
+  height: 60px;
+  float: left;
 }
 
 .form-container input[type="submit"]:hover {
-  background: black;
-  color: #f1f1f1;
-  border-color: #f1f1f1;
+  background: #748cde;
 }
 
-.checkboxes form {
+.information {
+  width: 50%;
+  margin: 100px auto;
+  background: rgba(121, 143, 224, 0.7);
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.7);
+}
+
+.information h1 {
+  color: white;
+  text-align: center;
+  border-bottom: 2px solid white;
+  box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.7);
+  width: 50%;
+  margin: auto;
+  background: rgba(65, 93, 189, 0.7);
+}
+
+.information form {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background: #f1f1f1;
-  margin: 10px auto;
+  margin: 2.5% auto;
   width: 95%;
   padding: 10px;
 }
 
-.checkboxes input[type="submit"] {
+.fa-check-circle {
+  color: #5bb378;
+}
+
+.information input[type="submit"] {
   border: 2px solid black;
   border-radius: 7px;
   background: transparent;
   font-weight: bold;
 }
 
-.checkboxes input[type="submit"]:hover {
+.information input[type="submit"]:hover {
   background: black;
   color: #f1f1f1;
   border-color: #f1f1f1;
 }
 
-.checkboxes select {
+.information select {
   border: 1px solid black;
   display: block;
   margin: 10px 0 10px 0;
+  border-radius: 5px;
+}
+
+.table-container {
+  width: 90%;
+  margin: 10px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.table-container h1 {
+  text-align: center;
+  color: white;
+}
+
+.index-logos {
+  margin: 10px auto;
+  width: 90%;
+}
+
+.index-logos form{
+  float: left;
+  width: 5%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.index-logos input[type="image"] {
+  width: 100%;
+  border-radius: 100px;
+  transition-duration: 0.2s;
+}
+
+.index-logos input[type="image"]:hover {
+  box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.7);
+}
+
+.pp-container {
+  width: 100%;
+  margin: 20px auto;
+  text-align: justify;
+  color: black;
+}
+
+.pp-container h1 {
+  text-align: center;
+  color: white;
+}
+
+.ppmessage {
+  background: white;
+  padding: 20px;
+  font-size: 17px;
+  margin-top: 50px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 
