@@ -62,12 +62,13 @@ router.get('/ytinfo', function (req, res, next) {
       // recommended
       div_els += `<form action="/ytdownload"><p style="font-weight: bold;">${format.mimeType.substring(0, format.mimeType.indexOf(';'))} ${quality ? '| ' + format.qualityLable : '| ' + format.quality} <i class="fas fa-check-circle"></i></p><input name="url" value="${format.url}" style="display: none;"><input name="format" value="${format.mimeType.substring(format.mimeType.indexOf('/') + 1, format.mimeType.indexOf(';'))}" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form>`
     }
+    div_els += '<span id="dots"></span><span id="more">';
     for (var c = 0; c < info.player_response.streamingData.adaptiveFormats.length; c++) {
       let format = info.player_response.streamingData.adaptiveFormats[c];
       let quality = format.qualityLable;
       div_els += `<form action="/ytdownload"><p style="font-weight: bold;">${format.mimeType.substring(0, format.mimeType.indexOf(';'))} ${quality ? '| ' + format.qualityLable : '| ' + format.quality}</p><input name="url" value="${format.url}" style="display: none;"><input name="format" value="${format.mimeType.substring(format.mimeType.indexOf('/') + 1, format.mimeType.indexOf(';'))}" style="display: none;"><input type="submit" value="Download" style="margin: 0; position: relative;"></form>`
     }
-    div_els += '<h1> </h1>'
+    div_els += '</span><button onclick="showMore()" id="showmore"><i class="fas fa-sort-down"></i></button><h1> </h1>'
     res.render('youtube', { info: div_els });
   });
 });
