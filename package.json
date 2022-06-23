@@ -19,7 +19,7 @@
     "http": "0.0.0",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
-    "jsdom": "^15.2.1",
+    "jsdom": "^16.5.0",
     "morgan": "~1.9.1",
     "node-url-downloader": "^0.1.9",
     "nodemon": "^1.19.4",
